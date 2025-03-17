@@ -37,7 +37,7 @@ body {
             <div class=" text-center mt-5">
                 <div class="auth-buttons">
                     <a href="./login.php" class="btn btn-primary">Login</a>
-                    <a href="./register.php" class="btn btn-primary">Register</a>
+                    <a href="./signup.php" class="btn btn-primary">Register</a>
                 </div>
                 <div class="cards-container">
                     <div class="card">
@@ -77,14 +77,50 @@ body {
             <h2 class="text-center">Testimonials</h2>
             <p class="text-center">Hear from our satisfied customers.</p>
             <div class="container-testimonials">
-                <div class="testimonial">
-                    <p>"RentIn made finding my new apartment so easy and stress-free!" - Jane Doe</p>
-                </div>
-                <div class="testimonial">
-                    <p>"The customer service is excellent. Highly recommend!" - John Smith</p>
+                <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php  
+                // Include the database configuration file
+                include '../../backend/database/db.php';
+                // Fetch testimonials from the database  
+               // Example query in index.php  
+$sql = "SELECT name, text, profile_picture FROM testimonials";  
+$result = $conn->query($sql);  
+
+if ($result) {  
+    while ($row = $result->fetch_assoc()) {  
+        echo "<div class='testimonial'>";  
+        // Display profile picture  
+        echo "<img src='" . htmlspecialchars($row['profile_picture']) . "' alt='Profile Picture' style='width:50px; height:50px; border-radius:50%;'>";  
+        echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";  
+        echo "<p>" . htmlspecialchars($row['text']) . "</p>";  
+        echo "</div>";  
+    }  
+} else {  
+    echo "Error: " . $conn->error; // Catch any errors  
+}   
+
+                $conn->close();  
+                ?>
+                    </div>
+
+                    <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </section>
+
+        <!-- Include Bootstrap CSS & JS (make sure you have these in your project) -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </div>
     <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

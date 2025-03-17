@@ -1,34 +1,68 @@
+<!-- pages/dashboard.php -->
+<?php  
+//check if session is active
+if (session_start() == PHP_SESSION_NONE){
+    session_start();    
+} // Start the session to access session variables  
+
+// Check if the user is logged in  
+if (!isset($_SESSION['user_id'])) {  
+    header("Location: login.php"); // Redirect to login if not logged in  
+    exit();  
+}  
+
+// Include database connection  
+include '../../backend/database/db.php';  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>RentIn - Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <?php include '../includes/header.php'; ?>
-    <main class="container mt-5">
-        <h1 class="text-center">Dashboard</h1>
-        <p class="text-center">Welcome to your dashboard.</p>
-        <section id="payments" class="mt-5">
-            <h2 class="text-center">Payments</h2>
-            <p class="text-center">Manage your payments here.</p>
-        </section>
-        <section id="reports" class="mt-5">
-            <h2 class="text-center">Reports</h2>
-            <p class="text-center">View your reports here.</p>
-        </section>
-        <section id="feedback" class="mt-5">
-            <h2 class="text-center">Feedback</h2>
-            <p class="text-center">View and provide feedback here.</p>
-        </section>
-    </main>
+
+    <div class="container mt-5">
+        <h1>Welcome back, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+        <p>You are logged in as a <?php echo htmlspecialchars($_SESSION['user_role']); ?>.</p>
+
+        <a href="logout.php" class="btn btn-danger">Logout</a>
+        <!-- Logout Button -->
+    </div>
+    <form action="submit_testimonial.php" method="POST" enctype="multipart/form-data" class="container mt-3 mb-5"
+        style="max-width: 800px;">
+        <div class="alert alert-info">
+            <p>Share your experience with RentIn by submitting a testimonial below.</p>
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="text">Your Testimonial:</label>
+                <textarea id="text" name="text" class="form-control" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="profile_picture">Profile Picture:</label>
+                <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+    </form>
+
     <?php include '../includes/footer.php'; ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
