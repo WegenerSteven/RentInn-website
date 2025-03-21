@@ -1,0 +1,179 @@
+#about-us {  
+    max-width: 1200px; /* Set a max width for the section */  
+    margin: auto; /* Center the section */  
+    padding: 20px; /* Padding around the section */  
+    text-align: center; /* Center text */  
+}  
+
+.container-abt {  
+    display: grid; /* Use grid layout for content */  
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive layout for cards */  
+    gap: 20px; /* Space between content */  
+    margin-top: 20px; /* Space above content */  
+}  
+
+.abt-content {  
+    background-color: #7eb9d4; /* Light background for cards */  
+    border: 1px solid #ddd; /* Light border */  
+    border-radius: 8px; /* Rounded corners */  
+    padding: 15px; /* Internal padding */  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */  
+    transition: transform 0.3s; /* Smooth scaling on hover */  
+}  
+
+.abt-content:hover {  
+    transform: scale(1.02); /* Scale up on hover */  
+}  
+
+h3 {  
+    margin-bottom: 10px; /* Space below headings */  
+    color: #333; /* Dark color for headings */  
+}  
+
+ul {  
+    list-style-type: none; /* Remove bullet points from lists */  
+    padding: 0; /* Remove padding */  
+    text-align: left; /* Align text to the left */  
+}  
+
+li {  
+    margin: 5px 0; /* Space between list items */  
+    font-size: 1em; /* Adjust font size */  
+    color: #555; /* Gray color for list items */  
+}  
+#gallery {
+    max-width: 1200px;
+    /* Set a max width for the gallery */
+    margin: auto;
+    /* Center the gallery */
+    text-align: center;
+    /* Center text */
+}
+
+.gallery-container {
+    display: grid;
+    /* Use grid layout for cards */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Responsive column layout */
+    gap: 20px;
+    /* Space between cards */
+    padding: 20px;
+    /* Padding around the grid */
+}
+
+.gallery-card {
+    background-color: #f9f9f9;
+    /* Light background for cards */
+    border: 1px solid #ddd;
+    /* Light border */
+    border-radius: 8px;
+    /* Rounded corners */
+    overflow: hidden;
+    /* Ensure no overflow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: transform 0.3s;
+    /* Smooth scaling on hover */
+}
+
+.gallery-card:hover {
+    transform: scale(1.05);
+    /* Scale up on hover */
+}
+
+.gallery-image {
+    width: 100%;
+    /* Make images responsive */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+.card-content {
+    padding: 10px;
+    /* Padding inside the card */
+    text-align: center;
+    /* Center text inside card */
+}
+
+.price-tag {
+    font-size: 1.2em;
+    /* Adjust font size for price */
+    color: #333;
+    /* Dark color for contrast */
+    margin: 5px 0;
+    /* Spacing above and below */
+}
+
+.buy-button {
+    background-color: #28a745;
+    /* Green background for buy button */
+    color: white;
+    /* White text */
+    border: none;
+    /* No borders */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px 15px;
+    /* Padding around text */
+    font-size: 1em;
+    /* Font size */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
+}
+
+.buy-button:hover {
+    background-color: #218838;
+    /* Darker green on hover */
+}
+#testimonials {  
+    max-width: 1200px; /* Set a max width for the testimonials section */  
+    margin: auto; /* Center the section */  
+    padding: 20px; /* Add padding */  
+    text-align: center; /* Center all text */  
+}  
+
+.container-testimonials {  
+    display: grid; /* Use grid layout for testimonial cards */  
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */  
+    gap: 20px; /* Space between testimonial cards */  
+    margin-top: 20px; /* Top margin for spacing */  
+}  
+.star {  
+    color: #ccc; /* Gray for empty stars */  
+    font-size: 1.2em; /* Size of stars */  
+}  
+
+.star.filled {  
+    color: #ffcc00; /* Gold color for filled stars */  
+} 
+.testimonial-card {  
+    background-color: #f9f9f9; /* Light background for cards */  
+    border: 1px solid #ddd; /* Light border */  
+    border-radius: 8px; /* Rounded corners */  
+    padding: 20px; /* Padding inside cards */  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */  
+    transition: transform 0.3s; /* Smooth scaling on hover */  
+}  
+
+.testimonial-card:hover {  
+    transform: scale(1.02); /* Scale card up on hover */  
+}  
+
+.profile-picture {  
+    width: 60px; /* Set a fixed width for profile pictures */  
+    height: 60px; /* Set a fixed height for profile pictures */  
+    border-radius: 50%; /* Make images circular */  
+    margin-bottom: 10px; /* Space below the image */  
+}  
+
+h3 {  
+    margin: 10px 0; /* Space above and below heading */  
+    color: #333; /* Dark color for headings */  
+}  
+
+.testimonial-text {  
+    font-size: 1em; /* Standard font size for text */  
+    color: #555; /* Gray color for text */  
+}  

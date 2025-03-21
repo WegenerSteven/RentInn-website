@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets//css/about.css" class="rel">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
     body {
@@ -37,20 +38,6 @@
     .testimonial {
         text-align: center;
         padding: 20px;
-    }
-
-    .carousel-inner {
-        display: flex;
-    }
-
-    .carousel-item {
-        flex: 1 0 auto;
-        transition: transform 0.5s ease;
-    }
-
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 5%;
     }
     </style>
 </head>
@@ -86,16 +73,55 @@
             <h2 class="text-center">About Us</h2>
             <p class="text-center">Learn more about our mission and values.</p>
             <div class="container-abt">
-
-
+                <div class="abt-content">
+                    <h3>Our Mission</h3>
+                    <p>At RentNest, our mission is to provide a seamless and affordable renting experience for everyone.
+                        We strive to connect renters with their ideal homes while ensuring a smooth and transparent
+                        rental process.</p>
+                </div>
+                <div class="abt-content">
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li><strong>Integrity:</strong> We uphold the highest standards of integrity in all our actions.
+                        </li>
+                        <li><strong>Customer Focus:</strong> Our customers are at the heart of everything we do.</li>
+                        <li><strong>Innovation:</strong> We continuously seek innovative solutions to improve our
+                            services.</li>
+                        <li><strong>Community:</strong> We are committed to supporting the communities we serve.</li>
+                    </ul>
+                </div>
+                <div class="abt-content">
+                    <h3>Our Story</h3>
+                    <p>Founded in 2023, RentNest was created to simplify the renting process in the housing market. With
+                        a dedicated team and advanced technology, we aim to empower renters by offering the best options
+                        tailored to their needs. Join us as we pave the way towards a better renting experience!</p>
+                </div>
             </div>
         </section>
 
         <section id="gallery" class="mt-5">
             <h2 class="text-center">Gallery</h2>
             <p class="text-center">Explore our gallery to see our properties and services in action.</p>
+            <div class="gallery-container">
+                <?php  
+        $imageDir = '../assets/images/gallery/';  
+        // Example prices for demonstration; retrieve actual prices dynamically if needed  
+        $prices = ['300,000', '450,000', '600,000','800, 000','900,000', '800,500','200,00', '100,000']; // Example prices  
+        $images = glob($imageDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);  
+        
+        foreach ($images as $index => $image) {  
+            $price = isset($prices[$index]) ? $prices[$index] : 'Price on Request'; // Set price for each image  
+            echo '<div class="gallery-card">';  
+            echo '<img src="' . $image . '" alt="Gallery Image" class="gallery-image">';  
+            echo '<div class="card-content">';  
+            echo '<p class="price-tag">KES ' . $price . '</p>'; // Price tag  
+            echo '<button class="buy-button" onclick="redirectToLogin()">Buy House</button>'; // Buy button  
+            echo '</div>';  
+            echo '</div>';  
+        }  
+        ?>
+            </div>
         </section>
-
         <section id="contact-us" class="mt-5">
             <h2 class="text-center">Contact Us</h2>
             <p class="text-center">Get in touch with us for any queries or support.</p>
@@ -160,42 +186,35 @@
             <h2 class="text-center">Testimonials</h2>
             <p class="text-center">Hear from our satisfied customers.</p>
             <div class="container-testimonials">
-                <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <?php  
-                        // Include the database configuration file
-                        include '../../backend/database/db.php';
-                        // Fetch testimonials from the database  
-                        $sql = "SELECT name, text, profile_picture FROM testimonials";  
-                        $result = $conn->query($sql);  
+                <?php  
+        // Include the database configuration file  
+        include '../../backend/database/db.php';  
+        
+        // Fetch testimonials from the database (assuming a 'rating' column is added)  
+        $sql = "SELECT name, text, profile_picture, rating FROM testimonials";  
+        $result = $conn->query($sql);  
 
-                        if ($result) {  
-                            $active = true;
-                            while ($row = $result->fetch_assoc()) {  
-                                echo "<div class='carousel-item " . ($active ? 'active' : '') . "'>";  
-                                $active = false;
-                                // Display profile picture  
-                                echo "<img src='" . htmlspecialchars($row['profile_picture']) . "' alt='Profile Picture' style='width:50px; height:50px; border-radius:50%;'>";  
-                                echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";  
-                                echo "<p>" . htmlspecialchars($row['text']) . "</p>";  
-                                echo "</div>";  
-                            }  
-                        } else {  
-                            echo "Error: " . $conn->error; // Catch any errors  
-                        }   
-                        $conn->close();  
-                        ?>
-                    </div>
+        if ($result) {  
+            while ($row = $result->fetch_assoc()) {  
+                echo "<div class='testimonial-card'>";  
+                
+                // Display rating stars  
+                $rating = intval($row['rating']); // Assuming rating is out of 5  
+                for ($i = 1; $i <= 5; $i++) {  
+                    echo ($i <= $rating) ? "<span class='star filled'>&#9733;</span>" : "<span class='star'>&#9734;</span>";  
+                }  
 
-                    <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+                // Display profile picture  
+                echo "<img src='" . htmlspecialchars($row['profile_picture']) . "' alt='Profile Picture' class='profile-picture'>";  
+                echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";  
+                echo "<p class='testimonial-text'>" . htmlspecialchars($row['text']) . "</p>";  
+                echo "</div>";  
+            }  
+        } else {  
+            echo "Error: " . $conn->error; // Catch any errors  
+        }   
+        $conn->close();  
+        ?>
             </div>
         </section>
 
@@ -207,6 +226,12 @@
     </div>
     <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    const redirectToLogin = () => {
+        window.location.href = './login.php';
+
+    }
+    </script>
 </body>
 
 </html>
