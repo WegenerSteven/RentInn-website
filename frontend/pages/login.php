@@ -29,8 +29,12 @@ if(isset($_POST ['submit'])){
             $_SESSION['username'] = $username;
             $_SESSION['user_role'] = $row['user_role'];
 
-            //redirect to the dashboard
-            header('Location: dashboard.php');
+            //redirect based on user role
+            if ($row['user_role'] === 'landlord') {
+                header('Location: ../Admin/AdminDashboard.php');
+            } else {
+                header('Location: dashboard.php');
+            }
             exit();
         } else{
             echo "<script>
